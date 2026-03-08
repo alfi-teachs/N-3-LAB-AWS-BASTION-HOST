@@ -186,11 +186,109 @@ From your terminal:
 
 ssh -i key.pem ec2-user@Public-IP
 
-# Step 13: Connect to Private Instance from Public Server
+# Step 13: Test Internet Connectivity from Public Instance
 
-Inside the public server:
+After logging into the public EC2 instance, check internet access.
 
-ssh -i key.pem ec2-user@Private-IP
+ping google.com
 
 
-Now the Public EC2 acts as a Bastion Host to reach the Private EC2.
+You should see replies from Google.
+
+Stop the command:
+
+Ctrl + C
+
+
+Why this is used:
+This confirms the public subnet has internet connectivity through the Internet Gateway and public route table.
+
+# Step 14: Ping Private Instance from Public Instance
+
+Now try to ping the private instance IP.
+
+ping <Private-Instance-Private-IP>
+
+
+Example:
+
+ping 10.0.2.10
+
+
+You may see no response.
+
+Stop the command:
+
+Ctrl + C
+
+
+Why this is used:
+This shows that the private instance cannot be directly accessed yet, and we need SSH using the private key.
+
+# Step 15: Create a File to Store the Private Key
+
+Create a file using nano.
+
+nano privatekey.pem
+
+
+Paste the private key content inside the file.
+
+Save the file:
+
+Ctrl + X
+Y
+Enter
+
+# Step 16: Change Permission of the Key
+chmod 600 privatekey.pem
+
+
+Why this is used:
+SSH requires secure permissions for the key file.
+chmod 600 allows only the owner to read and write the key.
+
+# Step 17: SSH into the Private Instance
+
+Connect to the private server.
+
+ssh -i privatekey.pem ec2-user@<Private-Instance-IP>
+
+
+Example:
+
+ssh -i privatekey.pem ec2-user@10.0.2.10
+
+
+Now you are logged into the private EC2 instance.
+
+# Step 18: Ping Private Network
+
+From the private instance, ping the public instance private IP.
+
+ping <Public-Instance-Private-IP>
+
+
+Example:
+
+ping 10.0.1.15
+
+
+Why this is used:
+This confirms communication between subnets inside the same VPC.
+
+Stop with:
+
+Ctrl + C
+
+# Step 19: Test Internet from Private Instance
+
+Now try:
+
+ping google.com
+
+
+You will see no response.
+
+Why this happens:
+The private subnet route table does not have a route to the Internet Gateway, so the instance cannot access the internet. It is intentionally private for security.
