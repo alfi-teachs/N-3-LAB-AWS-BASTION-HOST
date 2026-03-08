@@ -296,55 +296,9 @@ You will see no response.
 Why this happens:
 The private subnet route table does not have a route to the Internet Gateway, so the instance cannot access the internet. It is intentionally private for security.
 
-# Step 16: Change Permission of the Key
-chmod 600 privatekey.pem
 
 
-Why this is used:
-SSH requires secure permissions for the key file.
-chmod 600 allows only the owner to read and write the key.
 
-# Step 17: SSH into the Private Instance
-
-Connect to the private server.
-
-ssh -i privatekey.pem ec2-user@<Private-Instance-IP>
-
-
-Example:
-
-ssh -i privatekey.pem ec2-user@10.0.2.10
-
-
-Now you are logged into the private EC2 instance.
-
-# Step 18: Ping Private Network
-
-From the private instance, ping the public instance private IP.
-
-ping <Public-Instance-Private-IP>
-
-
-Example:
-
-ping 10.0.1.15
-
-
-Why this is used:
-This confirms communication between subnets inside the same VPC.
-
-Stop with:
-
-Ctrl + C
-
-# Step 19: Test Internet from Private Instance
-
-Now try:
-
-ping google.com
-
-
-You will see no response.
 
 Why this happens:
 The private subnet route table does not have a route to the Internet Gateway, so the instance cannot access the internet. It is intentionally private for security.
