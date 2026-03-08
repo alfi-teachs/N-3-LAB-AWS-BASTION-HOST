@@ -1,4 +1,4 @@
-# N3-LAB---AWS-BASTION-HOST
+# N3-LAB-AWS-BASTION-HOST
 
 # Step 1: Create VPC
 
