@@ -297,8 +297,11 @@ Why this happens:
 The private subnet route table does not have a route to the Internet Gateway, so the instance cannot access the internet. It is intentionally private for security.
 
 
+This demonstrates a common architecture:
 
+Public subnet → Internet access
 
+Private subnet → No internet access
 
-Why this happens:
-The private subnet route table does not have a route to the Internet Gateway, so the instance cannot access the internet. It is intentionally private for security.
+Public EC2 → used as Bastion Host to reach private servers.
+
