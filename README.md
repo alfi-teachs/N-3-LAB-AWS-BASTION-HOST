@@ -236,70 +236,18 @@ Paste the private key content inside the file.
 
 Save the file:
 
-Ctrl + O 
+Ctrl + O ENTER 
 
 Ctrl + X
 
-# Step 13: Test Internet Connectivity from Public Instance
-
-After logging into the public EC2 instance, check internet access.
-
-ping google.com
-
-
-You should see replies from Google.
-
-Stop the command:
-
-Ctrl + C
-
-
-Why this is used:
-This confirms the public subnet has internet connectivity through the Internet Gateway and public route table.
-
-# Step 14: Ping Private Instance from Public Instance
-
-Now try to ping the private instance IP.
-
-ping <Private-Instance-Private-IP>
-
-
-Example:
-
-ping 10.0.2.10
-
-
-You may see no response.
-
-Stop the command:
-
-Ctrl + C
-
-
-Why this is used:
-This shows that the private instance cannot be directly accessed yet, and we need SSH using the private key.
-
-# Step 15: Create a File to Store the Private Key
-
-Create a file using nano.
-
-nano privatekey.pem
-
-
-Paste the private key content inside the file.
-
-Save the file:
-
-ctrl +O 
-ENTER 
-
-Ctrl + X
 
 # Step 16: Change Permission of the Key
+
 chmod 600 privatekey.pem
 
 
 Why this is used:
+
 SSH requires secure permissions for the key file.
 chmod 600 allows only the owner to read and write the key.
 
